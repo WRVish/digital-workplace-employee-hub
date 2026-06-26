@@ -5,6 +5,20 @@
 
 ---
 
+## 🛑 REQUIRED: Power Apps Premium License
+
+> [!CAUTION]
+> **POWER APPS PREMIUM LICENSE REQUIRED**
+> 
+> Because this application is built using the **Power Apps Code App** architecture, it utilizes premium capabilities. 
+> 
+> - **The Developer/Maker** creating the app requires a Premium License.
+> - **EVERY END-USER** who accesses this application in your tenant must also be assigned a **Power Apps Premium License** (Per User or Per App plan).
+> 
+> **Do not proceed with deployment if your organization does not have the necessary Premium Licensing for all users.**
+
+---
+
 ## 🌟 Overview
 
 The **Digital Workplace Intranet** is a comprehensive, centralized employee portal designed to streamline internal operations. Built as a **Power Apps Code App**, it brings the speed and modern UI of a React SPA (Single Page Application) natively into the Microsoft 365 ecosystem. 
@@ -49,16 +63,6 @@ This project leverages a modern web development toolchain combined with the Powe
 
 ---
 
-## 💳 Licensing Requirements
-
-> [!IMPORTANT]
-> **Power Apps Premium License Required**
-> Because this application is built using the **Power Apps Code App** architecture, it utilizes premium capabilities. 
-> - The **developer/maker** creating the app requires a Premium License.
-> - **Every end-user** who accesses this application in your tenant must also be assigned a **Power Apps Premium License** (Per User or Per App plan).
-
----
-
 ## 📋 List Requirements & Setup
 
 The backend of this application relies on a specific relational SharePoint List schema (10 lists total). You can provision these lists in your tenant using one of two methods:
@@ -88,11 +92,11 @@ If you have forked or cloned this repository and wish to deploy it to your own M
 1. **Update PowerShell Script Users**: 
    Before running `Deploy-IntranetApp.ps1`, open the script and update the `$U_SuperAdmin`, `$U_ITAdmin`, and `$U_UserX` variables at the top of the file to match valid **UPNs (Email Addresses)** that exist in your specific Entra ID directory.
 2. **Update App Configuration & Connection References**:
-   Check the `digital-workplace-app/power.config.json` file. Ensure that any environment-specific endpoints, connector IDs, or workspace references align with your Dataverse environment.
+   Check the `digital-workplace-employee-hub/power.config.json` file. Ensure that any environment-specific endpoints, connector IDs, or workspace references align with your Dataverse environment.
    - When importing the solution into your own environment, you will be prompted to map the **Connection References** (e.g., SharePoint connector) to a valid connection authenticated with appropriate permissions in your tenant. Failure to do so will result in data fetching errors.
 3. **Run the App Locally**:
    ```bash
-   cd digital-workplace-app
+   cd digital-workplace-employee-hub
    npm install
    npx power-apps run
    ```
