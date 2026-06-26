@@ -1,0 +1,4 @@
+ListSchema={"schemaXmlList":[]}
+"Title","TicketID","RequestType","Category","RequestedBy","Description","Priority","AssignedTeam","AssignedToAccount","Status"
+"INC-001","INC-001","Incident","IT","E003","Laptop not turning on","High","IT Support","HelpdeskRead@vishpowerlabs.com","In Progress"
+"REQ-002","REQ-002","Service Request","HR","E004","Update banking details","Medium","HR Ops","user1@vishpowerlabs.com","New"

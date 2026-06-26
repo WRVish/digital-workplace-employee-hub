@@ -1,0 +1,71 @@
+{
+  "version": "1.0",
+  "appId": null,
+  "appDisplayName": "Digital Workplace",
+  "region": "prod",
+  "environmentId": "792e60bf-111d-ef8e-8c0b-64b015a78f8a",
+  "description": " ",
+  "buildPath": "./dist",
+  "buildEntryPoint": "index.html",
+  "localAppUrl": "http://localhost:5173",
+  "logoPath": "Default",
+  "connectionReferences": {
+    "dfe9c37d-3150-4ecf-a582-b1754346ef53": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+      "displayName": "SharePoint",
+      "dataSources": [
+        "employeemaster",
+        "incidentrequests",
+        "leaverequests",
+        "companyholidays",
+        "companyevents",
+        "expenseclaims",
+        "travelrequests",
+        "inventorymaster",
+        "inventoryassignment",
+        "approles",
+        "userpreferences"
+      ],
+      "dataSets": {
+        "https://devtenant0424.sharepoint.com/sites/DigitalWorkplace": {
+          "dataSources": {
+            "employeemaster": {
+              "tableName": "EmployeeMaster"
+            },
+            "incidentrequests": {
+              "tableName": "IncidentRequests"
+            },
+            "leaverequests": {
+              "tableName": "LeaveRequests"
+            },
+            "companyholidays": {
+              "tableName": "CompanyHolidays"
+            },
+            "companyevents": {
+              "tableName": "CompanyEvents"
+            },
+            "expenseclaims": {
+              "tableName": "ExpenseClaims"
+            },
+            "travelrequests": {
+              "tableName": "TravelRequests"
+            },
+            "inventorymaster": {
+              "tableName": "InventoryMaster"
+            },
+            "inventoryassignment": {
+              "tableName": "InventoryAssignment"
+            },
+            "approles": {
+              "tableName": "AppRoles"
+            },
+            "userpreferences": {
+              "tableName": "UserPreferences"
+            }
+          }
+        }
+      }
+    }
+  },
+  "databaseReferences": {}
+}

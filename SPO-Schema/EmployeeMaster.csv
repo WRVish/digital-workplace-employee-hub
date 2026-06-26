@@ -1,0 +1,7 @@
+ListSchema={"schemaXmlList":[]}
+"Title","EmployeeID","UserAccount","Email","Department","JobTitle","Location","JoiningDate","EmploymentType","Status"
+"E001","E001","vishnu@vishpowerlabs.com","vishnu@vishpowerlabs.com","IT","System Admin","HQ","2020-01-01","Full-Time","Active"
+"E002","E002","HelpdeskRead@vishpowerlabs.com","HelpdeskRead@vishpowerlabs.com","IT","IT Admin","HQ","2021-06-01","Full-Time","Active"
+"E003","E003","user1@vishpowerlabs.com","user1@vishpowerlabs.com","HR","HR Manager","Remote","2019-03-15","Full-Time","Active"
+"E004","E004","user2@vishpowerlabs.com","user2@vishpowerlabs.com","Finance","Finance Admin","HQ","2022-11-10","Full-Time","Active"
+"E005","E005","user3@vishpowerlabs.com","user3@vishpowerlabs.com","Sales","Sales Lead","Branch","2023-01-20","Full-Time","Active"

@@ -1,0 +1,4 @@
+ListSchema={"schemaXmlList":[]}
+"Title","AssetID","AssetName","Category","SerialNumber","PurchaseDate","Status","Location"
+"AST-1001","AST-1001","Dell XPS 15","Laptop","SN12345","2024-01-15","Assigned","HQ"
+"AST-1002","AST-1002","MacBook Pro 14","Laptop","SN98765","2025-03-10","Available","HQ"

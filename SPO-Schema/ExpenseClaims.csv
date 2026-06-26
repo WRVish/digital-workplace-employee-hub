@@ -1,0 +1,3 @@
+ListSchema={"schemaXmlList":[]}
+"Title","ClaimID","Employee","Category","Amount","ManagerApproval","FinanceStatus"
+"EXP-001","EXP-001","E005","Travel","450.00","Approved","Processing"

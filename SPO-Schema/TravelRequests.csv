@@ -1,0 +1,3 @@
+ListSchema={"schemaXmlList":[]}
+"Title","TravelID","Employee","Destination","StartDate","EndDate","EstimatedCost","ApprovalStatus"
+"TRV-001","TRV-001","E005","London HQ","2026-08-10","2026-08-15","1200.00","Approved"

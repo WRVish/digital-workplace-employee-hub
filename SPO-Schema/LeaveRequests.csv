@@ -1,0 +1,3 @@
+ListSchema={"schemaXmlList":[]}
+"Title","LeaveID","Employee","LeaveType","StartDate","EndDate","TotalDays","Reason","ApproverAccount","ApprovalStatus"
+"LV-001","LV-001","E004","Annual","2026-07-01","2026-07-05","5","Summer Vacation","user3@vishpowerlabs.com","Approved"

@@ -1,0 +1,18 @@
+# OS Files
+.DS_Store
+Thumbs.db
+
+# UI References & Backups
+UI-reference/
+backup/
+Prompt/
+
+# Ignore all markdown files except README.md
+*.md
+!README.md
+!readme.md
+
+# Ignore AI Prompt files
+"# Power Apps Code App - Project Generati"
+CodeApp_Prompt_README.md
+DesignDocument.md

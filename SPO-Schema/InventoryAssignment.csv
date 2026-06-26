@@ -1,0 +1,3 @@
+ListSchema={"schemaXmlList":[]}
+"Title","Asset","Employee","AssignedDate","AssignedByAccount","Status"
+"ASG-001","AST-1001","E002","2024-02-01","vishnu@vishpowerlabs.com","Active"
