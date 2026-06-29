@@ -75,7 +75,7 @@ export const MyExpenses: React.FC<{ userEmail: string }> = ({ userEmail }) => {
           </thead>
           <tbody>
             {expenses.map((exp) => (
-              <tr key={exp.ClaimID || exp.ID || Math.random().toString()}>
+              <tr key={exp.ClaimID || exp.ID || crypto.randomUUID()}>
                 <td><span className="mono">{exp.ClaimID}</span></td>
                 <td className="fw6">{exp.Title}</td>
                 <td>${exp.Amount}</td>
@@ -180,7 +180,7 @@ export const ExpenseManagement: React.FC<{ userEmail: string }> = ({ userEmail }
           </thead>
           <tbody>
             {expenses.map((exp) => (
-              <tr key={exp.ClaimID || exp.ID || Math.random().toString()}>
+              <tr key={exp.ClaimID || exp.ID || crypto.randomUUID()}>
                 <td><span className="mono">{exp.ClaimID}</span></td>
                 <td className="fw6">{exp.Title}</td>
                 <td>${exp.Amount}</td>

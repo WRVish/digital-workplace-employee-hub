@@ -87,7 +87,7 @@ export const MyLeave: React.FC<{ userEmail: string }> = ({ userEmail }) => {
           </thead>
           <tbody>
             {leaves.map((l) => (
-              <tr key={l.LeaveID || l.ID || Math.random().toString()}>
+              <tr key={l.LeaveID || l.ID || crypto.randomUUID()}>
                 <td><span className="mono">{l.LeaveID}</span></td>
                 <td className="fw6">{l.LeaveType} Leave</td>
                 <td>{l.StartDate ? new Date(l.StartDate).toLocaleDateString() : 'N/A'}</td>
@@ -187,7 +187,7 @@ export const LeaveManagement: React.FC<{ userEmail: string }> = ({ userEmail }) 
           </thead>
           <tbody>
             {leaves.map((l) => (
-              <tr key={l.LeaveID || l.ID || Math.random().toString()}>
+              <tr key={l.LeaveID || l.ID || crypto.randomUUID()}>
                 <td><span className="mono">{l.LeaveID}</span></td>
                 <td>{l.LeaveType} Leave</td>
                 <td>{l.StartDate ? new Date(l.StartDate).toLocaleDateString() : 'N/A'} - {l.EndDate ? new Date(l.EndDate).toLocaleDateString() : 'N/A'}</td>

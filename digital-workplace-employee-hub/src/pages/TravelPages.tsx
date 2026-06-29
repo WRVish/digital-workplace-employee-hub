@@ -75,7 +75,7 @@ export const MyTravel: React.FC<{ userEmail: string }> = ({ userEmail }) => {
           </thead>
           <tbody>
             {travels.map((trv) => (
-              <tr key={`${trv.TravelID || trv.ID || Math.random().toString()}`}>
+              <tr key={`${trv.TravelID || trv.ID || crypto.randomUUID()}`}>
                 <td><span className="mono">{trv.TravelID}</span></td>
                 <td className="fw6">{trv.Destination}</td>
                 <td>{trv.StartDate ? new Date(trv.StartDate).toLocaleDateString() : 'N/A'} - {trv.EndDate ? new Date(trv.EndDate).toLocaleDateString() : 'N/A'}</td>
@@ -164,7 +164,7 @@ export const TravelManagement: React.FC<{ userEmail: string }> = ({ userEmail })
           </thead>
           <tbody>
             {travels.map((trv) => (
-              <tr key={`${trv.TravelID || trv.ID || Math.random().toString()}`}>
+              <tr key={`${trv.TravelID || trv.ID || crypto.randomUUID()}`}>
                 <td><span className="mono">{trv.TravelID}</span></td>
                 <td className="fw6">{trv.Destination}</td>
                 <td>${trv.EstimatedCost}</td>

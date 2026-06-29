@@ -180,7 +180,7 @@ export const AssetManagement: React.FC = () => {
 
       <div className="ast-grid">
         {assets.map(a => (
-          <div className="ast-card" key={a.AssetID || Math.random()}>
+          <div className="ast-card" key={a.AssetID || crypto.randomUUID()}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div className="ast-ico"><Icons.Screen /></div>
               <div style={{ display: 'flex', gap: '4px' }}>

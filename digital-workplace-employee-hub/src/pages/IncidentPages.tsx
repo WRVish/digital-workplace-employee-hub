@@ -68,7 +68,7 @@ export const MyTickets: React.FC<{ userEmail: string }> = ({ userEmail }) => {
           </thead>
           <tbody>
             {incidents.map((inc) => (
-              <tr key={inc.TicketID || inc.ID || Math.random().toString()}>
+              <tr key={inc.TicketID || inc.ID || crypto.randomUUID()}>
                 <td><span className="mono">{inc.TicketID}</span></td>
                 <td>{inc.Category || 'IT'}</td>
                 <td className="fw6">{inc.Title}</td>
@@ -179,7 +179,7 @@ export const IncidentManagement: React.FC<{ userEmail: string }> = ({ userEmail 
           </thead>
           <tbody>
             {incidents.map((inc) => (
-              <tr key={inc.TicketID || inc.ID || Math.random().toString()}>
+              <tr key={inc.TicketID || inc.ID || crypto.randomUUID()}>
                 <td><span className="mono">{inc.TicketID}</span></td>
                 <td className="fw6">{inc.Title}</td>
                 <td><PriorityPill priority={inc.Priority || 'Medium'} /></td>

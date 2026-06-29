@@ -137,7 +137,7 @@ export const EmployeeManagement: React.FC = () => {
                 displayRole = emp.Role;
               }
               return (
-              <tr key={emp.EmployeeID || emp.Email || Math.random().toString()}>
+              <tr key={emp.EmployeeID || emp.Email || crypto.randomUUID()}>
                 <td><span className="mono">{emp.EmployeeID}</span></td>
                 <td className="fw6">{emp.Title}</td>
                 <td>{emp.Email}</td>

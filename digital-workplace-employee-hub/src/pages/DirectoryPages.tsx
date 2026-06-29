@@ -30,7 +30,7 @@ export const EmployeeDirectory: React.FC = () => {
 
       <div className="emp-grid">
         {employees.map((emp) => (
-          <div className="emp-card" key={emp.EmployeeID || emp.Email || Math.random().toString()}>
+          <div className="emp-card" key={emp.EmployeeID || emp.Email || crypto.randomUUID()}>
             <Avatar initials={emp.Title?.charAt(0) || 'U'} gradient="linear-gradient(135deg, var(--c-employee), var(--brand-600))" size="lg" className="emp-av" />
             <div className="emp-name">{emp.Title}</div>
             <div className="emp-role">{emp.JobTitle}</div>
@@ -182,7 +182,7 @@ export const EmployeeManagement: React.FC = () => {
                 displayRole = emp.Role;
               }
               return (
-              <tr key={emp.EmployeeID || emp.Email || Math.random().toString()}>
+              <tr key={emp.EmployeeID || emp.Email || crypto.randomUUID()}>
                 <td><span className="mono">{emp.EmployeeID}</span></td>
                 <td className="fw6">{emp.Title}</td>
                 <td>{emp.Email}</td>

@@ -260,7 +260,7 @@ export const AssetManagement: React.FC = () => {
 
       <div className="ast-grid">
         {assets.map(a => (
-          <div className="ast-card" key={a.AssetID || Math.random()}>
+          <div className="ast-card" key={a.AssetID || crypto.randomUUID()}>
             <div className="ast-ico"><Icons.Screen /></div>
             <div className="ast-content">
               <div className="ast-name">{a.AssetName || a.Title}</div>

@@ -202,7 +202,7 @@ export class DataService {
   }
 
   public static async createEmployee(record: any): Promise<void> {
-    if (!record.EmployeeID) record.EmployeeID = `E${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`;
+    if (!record.EmployeeID) record.EmployeeID = `E${(window.crypto.getRandomValues(new Uint32Array(1))[0] % 1000).toString().padStart(3, '0')}`;
     await this._createListItem('employeeMaster', record);
   }
 
@@ -313,7 +313,7 @@ export class DataService {
   }
 
   public static async createIncidentRequest(record: any): Promise<void> {
-    if (!record.TicketID) record.TicketID = `TKT-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`;
+    if (!record.TicketID) record.TicketID = `TKT-${(window.crypto.getRandomValues(new Uint32Array(1))[0] % 10000).toString().padStart(4, '0')}`;
     await this._createListItem('incidentRequests', record);
   }
 
@@ -338,7 +338,7 @@ export class DataService {
   }
 
   public static async createLeaveRequest(record: any): Promise<void> {
-    if (!record.LeaveID) record.LeaveID = `LV-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`;
+    if (!record.LeaveID) record.LeaveID = `LV-${(window.crypto.getRandomValues(new Uint32Array(1))[0] % 10000).toString().padStart(4, '0')}`;
     await this._createListItem('leaveRequests', record);
   }
 
@@ -359,7 +359,7 @@ export class DataService {
   }
 
   public static async createExpenseClaim(record: any): Promise<void> {
-    if (!record.ClaimID) record.ClaimID = `EXP-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`;
+    if (!record.ClaimID) record.ClaimID = `EXP-${(window.crypto.getRandomValues(new Uint32Array(1))[0] % 10000).toString().padStart(4, '0')}`;
     await this._createListItem('expenseClaims', record);
   }
 
@@ -372,7 +372,7 @@ export class DataService {
   }
 
   public static async createTravelRequest(record: any): Promise<void> {
-    if (!record.TravelID) record.TravelID = `TRV-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`;
+    if (!record.TravelID) record.TravelID = `TRV-${(window.crypto.getRandomValues(new Uint32Array(1))[0] % 10000).toString().padStart(4, '0')}`;
     await this._createListItem('travelRequests', record);
   }
 
@@ -402,7 +402,7 @@ export class DataService {
   }
 
   public static async createInventoryAssignment(record: any): Promise<void> {
-    if (!record.Title) record.Title = `ASG-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`;
+    if (!record.Title) record.Title = `ASG-${(window.crypto.getRandomValues(new Uint32Array(1))[0] % 10000).toString().padStart(4, '0')}`;
     await this._createListItem('inventoryAssignments', record);
   }
 
@@ -422,7 +422,7 @@ export class DataService {
 
   public static async createLeaveType(title: string, defaultBalance: number): Promise<void> {
     this._mockLeaveTypes.push({
-      ID: Math.floor(Math.random() * 10000),
+      ID: (window.crypto.getRandomValues(new Uint32Array(1))[0] % 10000),
       Title: title,
       DefaultBalance: defaultBalance
     });
@@ -468,7 +468,7 @@ export class DataService {
   }
 
   public static async createInventoryItem(record: any): Promise<void> {
-    if (!record.AssetID) record.AssetID = `AST-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`;
+    if (!record.AssetID) record.AssetID = `AST-${(window.crypto.getRandomValues(new Uint32Array(1))[0] % 10000).toString().padStart(4, '0')}`;
     try {
       if (!this._siteUrl || this._siteUrl.includes('localhost')) {
          throw new Error("Localhost mock");

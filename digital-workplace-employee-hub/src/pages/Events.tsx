@@ -44,7 +44,7 @@ export const Events: React.FC<{ isAdmin: boolean }> = ({ isAdmin }) => {
               </div>
             ) : (
               holidays.map((h) => (
-                <div className="ev-item" key={h.ID || Math.random().toString()}>
+                <div className="ev-item" key={h.ID || crypto.randomUUID()}>
                   <div className="ev-date"><div className="day">{(h.Date ? new Date(h.Date) : new Date()).getDate()}</div><div className="mon">{(h.Date ? new Date(h.Date) : new Date()).toLocaleString('default', { month: 'short' }).toUpperCase()}</div></div>
                   <div className="ev-div"></div>
                   <div className="ev-info">
@@ -73,7 +73,7 @@ export const Events: React.FC<{ isAdmin: boolean }> = ({ isAdmin }) => {
               </div>
             ) : (
               events.map((e) => (
-                <div className="ev-item" key={e.ID || Math.random().toString()}>
+                <div className="ev-item" key={e.ID || crypto.randomUUID()}>
                   <div className="ev-date"><div className="day">{(e.Date ? new Date(e.Date) : new Date()).getDate()}</div><div className="mon">{(e.Date ? new Date(e.Date) : new Date()).toLocaleString('default', { month: 'short' }).toUpperCase()}</div></div>
                   <div className="ev-div"></div>
                   <div className="ev-info">

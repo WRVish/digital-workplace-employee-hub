@@ -105,14 +105,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ userEmail, userName, isAdm
               </thead>
               <tbody>
                 {leaves.map((l) => (
-                  <tr key={l.LeaveID || l.ID || Math.random().toString()}>
+                  <tr key={l.LeaveID || l.ID || crypto.randomUUID()}>
                     <td><span className="mono">{l.LeaveID}</span></td>
                     <td>{l.LeaveType} Leave</td>
                     <td><Pill type={l.ApprovalStatus === 'Approved' ? 'approved' : 'pending'} text={l.ApprovalStatus || 'Pending'} /></td>
                   </tr>
                 ))}
                 {incidents.map((inc) => (
-                  <tr key={inc.TicketID || inc.ID || Math.random().toString()}>
+                  <tr key={inc.TicketID || inc.ID || crypto.randomUUID()}>
                     <td><span className="mono">{inc.TicketID}</span></td>
                     <td>IT Ticket</td>
                     <td><Pill type={inc.Status === 'Resolved' ? 'resolved' : 'inprog'} text={inc.Status || 'In Progress'} /></td>
