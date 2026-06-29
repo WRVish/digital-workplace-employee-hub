@@ -16,3 +16,6 @@ Prompt/
 "# Power Apps Code App - Project Generati"
 CodeApp_Prompt_README.md
 DesignDocument.md
+
+# Ignore notrequired folder
+notrequired/
