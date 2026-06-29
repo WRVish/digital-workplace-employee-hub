@@ -3,50 +3,6 @@ import { DataService } from '../dataService';
 import { StatCard, CardHeader, Pill, Avatar, Button, Icons, Modal, FormGroup, Input, Select } from '../components/UIElements';
 import { EmployeeMaster } from '../types';
 
-export const EmployeeDirectory: React.FC = () => {
-  const [employees, setEmployees] = useState<EmployeeMaster[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    DataService.getEmployees().then(res => {
-      setEmployees(res);
-      setLoading(false);
-    });
-  }, []);
-
-  if (loading) return <div>Loading...</div>;
-
-  return (
-    <div className="page active">
-      <div className="page-hd">
-        <div className="page-hd-l">
-          <h1>Employee Directory</h1>
-          <p>Find and connect with colleagues across the organisation.</p>
-        </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <Button variant="outline" icon={<Icons.Search />}>Search Directory</Button>
-        </div>
-      </div>
-
-      <div className="emp-grid">
-        {employees.map((emp) => (
-          <div className="emp-card" key={emp.EmployeeID || emp.Email || Math.random().toString()}>
-            <Avatar initials={emp.Title?.charAt(0) || 'U'} gradient="linear-gradient(135deg, var(--c-employee), var(--brand-600))" size="lg" className="emp-av" />
-            <div className="emp-name">{emp.Title}</div>
-            <div className="emp-role">{emp.JobTitle}</div>
-            <div className="emp-role" style={{ marginTop: '5px' }}><a href={`mailto:${emp.Email}`} style={{ color: 'var(--brand-600)', textDecoration: 'none' }}>{emp.Email}</a></div>
-          </div>
-        ))}
-        {/* Fill with a dummy if needed, based on UI-reference */}
-        <div className="emp-card">
-          <Avatar initials="PR" gradient="linear-gradient(135deg, #F97316, #EF4444)" size="lg" className="emp-av" />
-          <div className="emp-name">Pradeep</div>
-          <div className="emp-role">Employee</div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export const EmployeeManagement: React.FC = () => {
   const [employees, setEmployees] = useState<EmployeeMaster[]>([]);
@@ -151,24 +107,23 @@ export const EmployeeManagement: React.FC = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="page active">
-      <div className="page-hd">
-        <div className="page-hd-l">
-          <h1>Employee Management</h1>
-          <p>Manage employee records, roles, and status.</p>
+    <div className="eh-page active">
+      <div className="eh-page-hd">
+        <div className="eh-page-hd-l">
+          <h1>User Management</h1>
+          <p>Manage user records, roles, and status.</p>
         </div>
         <Button variant="primary" icon={<Icons.Plus />} onClick={() => setIsAddOpen(true)}>Add Employee</Button>
       </div>
 
-      <div className="grid g3 mb14">
+      <div className="eh-grid eh-g3 mb14">
         <StatCard type="employee" value={employees.length} label="Total Employees" />
         <StatCard type="employee" value={employees.filter(e => e.Status === 'Active').length} label="Active Employees" />
       </div>
 
-      <div className="card">
+      <div className="eh-card">
         <CardHeader title="All Employees" dotColor="var(--brand-600)" />
         {employees.length === 0 ? <div style={{padding: '20px', color: 'var(--text-3)'}}>No employees found.</div> : (
-        <div className="dt-wrap">
         <table className="dt">
           <thead>
             <tr><th>Emp ID</th><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr>
@@ -194,7 +149,6 @@ export const EmployeeManagement: React.FC = () => {
             })}
           </tbody>
         </table>
-        </div>
         )}
       </div>
 

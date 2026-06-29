@@ -80,6 +80,7 @@ export const MyLeave: React.FC<{ userEmail: string }> = ({ userEmail }) => {
       <div className="card">
         <CardHeader title="My Leave History" dotColor="var(--c-leave)" />
         {leaves.length === 0 ? <div style={{padding: '20px', color: 'var(--text-3)'}}>No leave requests found.</div> : (
+        <div className="dt-wrap">
         <table className="dt">
           <thead>
             <tr><th>Leave ID</th><th>Type</th><th>Start Date</th><th>End Date</th><th>Days</th><th>Status</th></tr>
@@ -97,6 +98,7 @@ export const MyLeave: React.FC<{ userEmail: string }> = ({ userEmail }) => {
             ))}
           </tbody>
         </table>
+        </div>
         )}
       </div>
 
@@ -178,6 +180,7 @@ export const LeaveManagement: React.FC<{ userEmail: string }> = ({ userEmail }) 
       <div className="card">
         <CardHeader title="Leave Requests" dotColor="var(--brand-600)" />
         {leaves.length === 0 ? <div style={{padding: '20px', color: 'var(--text-3)'}}>No leave requests found.</div> : (
+        <div className="dt-wrap">
         <table className="dt">
           <thead>
             <tr><th>Leave ID</th><th>Type</th><th>Dates</th><th>Days</th><th>Status</th><th>Actions</th></tr>
@@ -200,6 +203,7 @@ export const LeaveManagement: React.FC<{ userEmail: string }> = ({ userEmail }) 
             ))}
           </tbody>
         </table>
+        </div>
         )}
       </div>
     </div>

@@ -44,24 +44,23 @@ export const MyTickets: React.FC<{ userEmail: string }> = ({ userEmail }) => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="page active">
-      <div className="page-hd">
-        <div className="page-hd-l">
+    <div className="eh-page active">
+      <div className="eh-page-hd">
+        <div className="eh-page-hd-l">
           <h1>My Tickets</h1>
           <p>Track your IT and HR service requests.</p>
         </div>
         <Button variant="primary" icon={<Icons.Plus />} onClick={() => setIsRaiseOpen(true)}>Raise Ticket</Button>
       </div>
 
-      <div className="grid g3 mb14">
+      <div className="eh-grid eh-g3 mb14">
         <StatCard type="incident" value={incidents.filter(i => i.Status !== 'Resolved').length} label="Open Tickets" />
         <StatCard type="employee" value={incidents.filter(i => i.Status === 'Resolved').length} label="Resolved Tickets" />
       </div>
 
-      <div className="card">
+      <div className="eh-card">
         <CardHeader title="Ticket History" dotColor="var(--c-incident)" />
         {incidents.length === 0 ? <div style={{padding: '20px', color: 'var(--text-3)'}}>No tickets found.</div> : (
-        <div className="dt-wrap">
         <table className="dt">
           <thead>
             <tr><th>Ticket ID</th><th>Category</th><th>Title</th><th>Priority</th><th>Status</th></tr>
@@ -78,7 +77,6 @@ export const MyTickets: React.FC<{ userEmail: string }> = ({ userEmail }) => {
             ))}
           </tbody>
         </table>
-        </div>
         )}
       </div>
 
@@ -155,24 +153,23 @@ export const IncidentManagement: React.FC<{ userEmail: string }> = ({ userEmail 
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="page active">
-      <div className="page-hd">
-        <div className="page-hd-l">
+    <div className="eh-page active">
+      <div className="eh-page-hd">
+        <div className="eh-page-hd-l">
           <h1>Incident Management</h1>
           <p>Manage and resolve organizational service requests.</p>
         </div>
       </div>
 
-      <div className="grid g3 mb14">
+      <div className="eh-grid eh-g3 mb14">
         <StatCard type="incident" value={incidents.filter(i => i.Status !== 'Resolved').length} label="Total Open Tickets" />
         <StatCard type="incident" value={incidents.filter(i => i.Priority === 'High' && i.Status !== 'Resolved').length} label="High Priority" subType="down" />
         <StatCard type="employee" value={incidents.filter(i => i.Status === 'Resolved').length} label="Resolved Tickets" />
       </div>
 
-      <div className="card">
+      <div className="eh-card">
         <CardHeader title="All Tickets" dotColor="var(--brand-600)" />
         {incidents.length === 0 ? <div style={{padding: '20px', color: 'var(--text-3)'}}>No tickets found.</div> : (
-        <div className="dt-wrap">
         <table className="dt">
           <thead>
             <tr><th>Ticket ID</th><th>Title</th><th>Priority</th><th>Status</th><th>Actions</th></tr>
@@ -189,7 +186,6 @@ export const IncidentManagement: React.FC<{ userEmail: string }> = ({ userEmail 
             ))}
           </tbody>
         </table>
-        </div>
         )}
       </div>
 

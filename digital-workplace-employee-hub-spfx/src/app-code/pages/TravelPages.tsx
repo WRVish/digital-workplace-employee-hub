@@ -51,24 +51,23 @@ export const MyTravel: React.FC<{ userEmail: string }> = ({ userEmail }) => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="page active">
-      <div className="page-hd">
-        <div className="page-hd-l">
+    <div className="eh-page active">
+      <div className="eh-page-hd">
+        <div className="eh-page-hd-l">
           <h1>My Travel</h1>
           <p>Request and track business travel.</p>
         </div>
         <Button variant="primary" icon={<Icons.Plus />} onClick={() => setIsOpen(true)}>Travel Request</Button>
       </div>
 
-      <div className="grid g3 mb14">
+      <div className="eh-grid eh-g3 mb14">
         <StatCard type="travel" value={travels.length} label="Total Trips" />
         <StatCard type="expense" value={`$${travels.reduce((a, b) => a + (b.EstimatedCost || 0), 0)}`} label="Est. Total Cost" />
       </div>
 
-      <div className="card">
+      <div className="eh-card">
         <CardHeader title="Travel History" dotColor="var(--c-travel)" />
         {travels.length === 0 ? <div style={{padding: '20px', color: 'var(--text-3)'}}>No travel requests found.</div> : (
-        <div className="dt-wrap">
         <table className="dt">
           <thead>
             <tr><th>Travel ID</th><th>Destination</th><th>Dates</th><th>Est. Cost</th><th>Status</th></tr>
@@ -85,7 +84,6 @@ export const MyTravel: React.FC<{ userEmail: string }> = ({ userEmail }) => {
             ))}
           </tbody>
         </table>
-        </div>
         )}
       </div>
 
@@ -93,7 +91,7 @@ export const MyTravel: React.FC<{ userEmail: string }> = ({ userEmail }) => {
         <FormGroup label="Destination">
           <Input value={formData.Destination} onChange={e => setFormData({...formData, Destination: e.target.value})} placeholder="E.g. London HQ" />
         </FormGroup>
-        <div className="grid g2" style={{ gap: '16px' }}>
+        <div className="eh-grid eh-g2" style={{ gap: '16px' }}>
           <FormGroup label="Start Date">
             <Input type="date" value={formData.StartDate} onChange={e => setFormData({...formData, StartDate: e.target.value})} />
           </FormGroup>
@@ -141,23 +139,22 @@ export const TravelManagement: React.FC<{ userEmail: string }> = ({ userEmail })
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="page active">
-      <div className="page-hd">
-        <div className="page-hd-l">
+    <div className="eh-page active">
+      <div className="eh-page-hd">
+        <div className="eh-page-hd-l">
           <h1>Travel Management</h1>
           <p>Review and approve employee travel requests.</p>
         </div>
       </div>
 
-      <div className="grid g3 mb14">
+      <div className="eh-grid eh-g3 mb14">
         <StatCard type="travel" value={travels.filter(t => t.ApprovalStatus === 'Pending').length} label="Pending Requests" />
         <StatCard type="expense" value={`$${travels.filter(t => t.ApprovalStatus === 'Pending').reduce((a, b) => a + (b.EstimatedCost || 0), 0)}`} label="Pending Est. Cost" />
       </div>
 
-      <div className="card">
+      <div className="eh-card">
         <CardHeader title="Team Travel Requests" dotColor="var(--brand-600)" />
         {travels.length === 0 ? <div style={{padding: '20px', color: 'var(--text-3)'}}>No travel requests found.</div> : (
-        <div className="dt-wrap">
         <table className="dt">
           <thead>
             <tr><th>Travel ID</th><th>Destination</th><th>Cost</th><th>Status</th><th>Actions</th></tr>
@@ -183,7 +180,6 @@ export const TravelManagement: React.FC<{ userEmail: string }> = ({ userEmail })
             ))}
           </tbody>
         </table>
-        </div>
         )}
       </div>
     </div>

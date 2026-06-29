@@ -273,11 +273,11 @@ $Cols_InventoryMaster = @(
 )
 
 $Cols_InventoryAssignment = @(
+    @{ Name="Title"; Type="Text"; Required=$true }
     @{ Name="Asset"; Type="Lookup"; LookupList="InventoryMaster"; LookupField="Title"; Required=$false }
-    @{ Name="Employee"; Type="Lookup"; LookupList="EmployeeMaster"; LookupField="Title"; Required=$false }
+    @{ Name="AssignedTo"; Type="User"; Required=$true }
     @{ Name="AssignedDate"; Type="DateTime"; Required=$true }
     @{ Name="ReturnedDate"; Type="DateTime"; Required=$false }
-    @{ Name="AssignedByAccount"; Type="User"; Required=$false }
     @{ Name="Status"; Type="Choice"; Choices=@("Active","Returned","Lost"); Required=$true }
 )
 
@@ -323,7 +323,7 @@ $Data_InventoryMaster = @(
 )
 
 $Data_InventoryAssignment = @(
-    [PSCustomObject]@{ Title="ASG-001"; Asset="AST-1001"; Employee="E002"; AssignedDate="2024-02-01"; AssignedByAccount=$U_SuperAdmin; Status="Active" }
+    [PSCustomObject]@{ Title="ASG-001"; Asset="AST-1001"; AssignedToAccount=$U_ITAdmin; AssignedDate="2024-02-01"; Status="Active" }
 )
 
 # ============================================================

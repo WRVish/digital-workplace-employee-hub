@@ -51,25 +51,24 @@ export const MyExpenses: React.FC<{ userEmail: string }> = ({ userEmail }) => {
   const pendingCount = expenses.filter(e => e.ManagerApproval !== 'Approved' || e.FinanceStatus !== 'Paid').length;
 
   return (
-    <div className="page active">
-      <div className="page-hd">
-        <div className="page-hd-l">
+    <div className="eh-page active">
+      <div className="eh-page-hd">
+        <div className="eh-page-hd-l">
           <h1>My Expenses</h1>
           <p>Submit and track your expense claims.</p>
         </div>
         <Button variant="primary" icon={<Icons.Plus />} onClick={() => setIsOpen(true)}>Submit Expense</Button>
       </div>
 
-      <div className="grid g3 mb14">
+      <div className="eh-grid eh-g3 mb14">
         <StatCard type="expense" value={`$${totalClaimed}`} label="Total Claimed" />
         <StatCard type="incident" value={pendingCount} label="Pending Processing" subType="down" />
         <StatCard type="leave" value="0" label="Rejected Claims" />
       </div>
 
-      <div className="card">
+      <div className="eh-card">
         <CardHeader title="Claim History" dotColor="var(--c-expense)" />
         {expenses.length === 0 ? <div style={{padding: '20px', color: 'var(--text-3)'}}>No expenses found.</div> : (
-        <div className="dt-wrap">
         <table className="dt">
           <thead>
             <tr><th>Claim ID</th><th>Description</th><th>Amount</th><th>Manager</th><th>Finance</th></tr>
@@ -86,7 +85,6 @@ export const MyExpenses: React.FC<{ userEmail: string }> = ({ userEmail }) => {
             ))}
           </tbody>
         </table>
-        </div>
         )}
       </div>
 
@@ -160,23 +158,22 @@ export const ExpenseManagement: React.FC<{ userEmail: string }> = ({ userEmail }
   };
 
   return (
-    <div className="page active">
-      <div className="page-hd">
-        <div className="page-hd-l">
+    <div className="eh-page active">
+      <div className="eh-page-hd">
+        <div className="eh-page-hd-l">
           <h1>Expense Management</h1>
           <p>Review, approve, and process employee expense claims.</p>
         </div>
       </div>
 
-      <div className="grid g3 mb14">
+      <div className="eh-grid eh-g3 mb14">
         <StatCard type="expense" value={`$${totalPending}`} label="Pending Value" subValue="Action required" />
         <StatCard type="employee" value={expenses.length} label="Total Claims" />
       </div>
 
-      <div className="card">
+      <div className="eh-card">
         <CardHeader title="Team Claims" dotColor="var(--brand-600)" />
         {expenses.length === 0 ? <div style={{padding: '20px', color: 'var(--text-3)'}}>No expenses found.</div> : (
-        <div className="dt-wrap">
         <table className="dt">
           <thead>
             <tr><th>Claim ID</th><th>Description</th><th>Amount</th><th>Manager</th><th>Finance</th><th>Actions</th></tr>
@@ -198,7 +195,6 @@ export const ExpenseManagement: React.FC<{ userEmail: string }> = ({ userEmail }
             ))}
           </tbody>
         </table>
-        </div>
         )}
       </div>
     </div>

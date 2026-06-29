@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "digital-workplace-employee-hub-spfx-client-side-solution",
+    "id": "8402bcf2-ea78-4fec-9196-a95690ae6d60",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "digital-workplace-employee-hub-spfx description"
+      },
+      "longDescription": {
+        "default": "digital-workplace-employee-hub-spfx description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "digital-workplace-employee-hub-spfx Feature",
+        "description": "The feature that activates elements of the digital-workplace-employee-hub-spfx solution.",
+        "id": "a2af4d31-f429-461a-b12b-b105d0ecdb78",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/digital-workplace-employee-hub-spfx.sppkg"
+  }
+}

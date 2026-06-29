@@ -8,15 +8,15 @@ import { MyLeave, LeaveManagement } from './pages/LeavePages';
 import { MyTickets, IncidentManagement } from './pages/IncidentPages';
 import { MyExpenses, ExpenseManagement } from './pages/ExpensePages';
 import { MyTravel, TravelManagement } from './pages/TravelPages';
-import { EmployeeDirectory, EmployeeManagement } from './pages/DirectoryPages';
-import { RoleManager, AssetManagement } from './pages/SystemPages';
+import { EmployeeManagement } from './pages/DirectoryPages';
+import { AssetManagement } from './pages/SystemPages';
 import { Events } from './pages/Events';
 
 // Dummy page fallback
 const PlaceholderPage = ({ title }: { title: string }) => (
-  <div className="page active">
-    <div className="page-hd"><div className="page-hd-l"><h1>{title}</h1></div></div>
-    <div className="card"><p>This page is under construction or not found.</p></div>
+  <div className="eh-page active">
+    <div className="eh-page-hd"><div className="eh-page-hd-l"><h1>{title}</h1></div></div>
+    <div className="eh-card"><p>This page is under construction or not found.</p></div>
   </div>
 );
 
@@ -42,7 +42,7 @@ function App() {
         const schemeStr = typeof prefs.ColorScheme === 'object' ? prefs.ColorScheme.Value : prefs.ColorScheme;
         if (themeStr === 'Dark') htmlClassList.add('theme-dark');
         if (schemeStr && schemeStr !== 'Ocean Blue') {
-          htmlClassList.add('scheme-' + schemeStr.toLowerCase().replace(/ /g, '-'));
+          htmlClassList.add('scheme-' + schemeStr.toLowerCase().replaceAll(' ', '-'));
         }
       }
     };
@@ -126,8 +126,7 @@ function App() {
         return <MyExpenses userEmail={userEmail} />;
       case 'mytravel':
         return <MyTravel userEmail={userEmail} />;
-      case 'directory':
-        return <EmployeeDirectory />;
+
       case 'employees':
         return <EmployeeManagement />;
       case 'leaves':
@@ -142,17 +141,33 @@ function App() {
         return <AssetManagement />;
       case 'events':
         return <Events isAdmin={roles.includes('sysadmin') || roles.includes('hradmin') || roles.includes('itadmin')} />;
-      case 'roles':
-        return <RoleManager />;
-      case 'system':
-        return <PlaceholderPage title="System Health" />;
+
       default:
         return <PlaceholderPage title={currentPage} />;
     }
   };
 
+  const getPageTitle = (page: string) => {
+    const titles: Record<string, string> = {
+      dashboard: 'Dashboard',
+      myprofile: 'My Profile',
+      myleave: 'My Leave',
+      mytickets: 'My Tickets',
+      myexpenses: 'My Expenses',
+      mytravel: 'My Travel',
+      employees: 'User Management',
+      leaves: 'Leave Administration',
+      incidents: 'Incident Management',
+      expenses: 'Expense Administration',
+      travels: 'Travel Administration',
+      assets: 'Asset Management',
+      events: 'Events'
+    };
+    return titles[page] || (page.charAt(0).toUpperCase() + page.slice(1));
+  };
+
   return (
-    <>
+    <div className="app-container">
       <Sidebar 
         roles={roles}
         isOpen={isSidebarOpen} 
@@ -166,19 +181,21 @@ function App() {
         rolePillText={rolePillText}
         avatarGradient={avatarGradient}
       />
-      <Topbar 
-        pageTitle={currentPage.charAt(0).toUpperCase() + currentPage.slice(1)}
-        onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
-        userInitials={userInitials}
-        avatarGradient={avatarGradient}
-      />
-      <main className="main">
-        {renderPage()}
-      </main>
+      <div className="content-wrapper">
+        <Topbar 
+          pageTitle={getPageTitle(currentPage)}
+          onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+          userInitials={userInitials}
+          avatarGradient={avatarGradient}
+        />
+        <main className="eh-main">
+          {renderPage()}
+        </main>
+      </div>
       
       {/* Toast container */}
       <div id="toast" style={{ opacity: 0, transform: 'translateY(20px)' }}></div>
-    </>
+    </div>
   );
 }
 

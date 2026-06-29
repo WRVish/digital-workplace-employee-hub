@@ -3,87 +3,6 @@ import { DataService } from '../dataService';
 import { StatCard, CardHeader, Button, Icons, Modal, FormGroup, Input, Select } from '../components/UIElements';
 import { InventoryMaster } from '../types';
 
-export const RoleManager: React.FC = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    DataService.getUserRoles('dummy').then(() => {
-      setLoading(false);
-    });
-  }, []);
-
-  if (loading) return <div>Loading...</div>;
-
-  return (
-    <div className="page active">
-      <div className="page-hd">
-        <div className="page-hd-l">
-          <h1>Role Manager</h1>
-          <p>Control access permissions across the application.</p>
-        </div>
-        <Button variant="primary" icon={<Icons.Shield />}>Create Role</Button>
-      </div>
-
-      <div className="card mb14">
-        <CardHeader title="Permission Matrix" dotColor="var(--brand-600)" />
-        <div style={{ overflowX: 'auto' }}>
-          <table className="perm-table">
-            <thead>
-              <tr>
-                <th>Module</th><th>Sys Admin</th><th>HR Admin</th><th>IT Admin</th><th>Finance</th><th>Manager</th><th>Employee</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Employee Data</td>
-                <td className="chk">●</td><td className="chk">●</td><td className="cross">○</td><td className="cross">○</td><td className="chk">●</td><td className="cross">○</td>
-              </tr>
-              <tr>
-                <td>Leave Approvals</td>
-                <td className="chk">●</td><td className="chk">●</td><td className="cross">○</td><td className="cross">○</td><td className="chk">●</td><td className="cross">○</td>
-              </tr>
-              <tr>
-                <td>IT Assets</td>
-                <td className="chk">●</td><td className="cross">○</td><td className="chk">●</td><td className="cross">○</td><td className="cross">○</td><td className="cross">○</td>
-              </tr>
-              <tr>
-                <td>Expense Processing</td>
-                <td className="chk">●</td><td className="cross">○</td><td className="cross">○</td><td className="chk">●</td><td className="chk">●</td><td className="cross">○</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div className="card">
-        <CardHeader title="Assigned Roles" dotColor="var(--brand-400)" />
-        <div className="dt-wrap">
-        <table className="dt">
-          <thead>
-            <tr><th>Role ID</th><th>Role Name</th><th>Description</th><th>Users</th><th>Actions</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span className="mono">ROLE-01</span></td>
-              <td className="fw6">System Admin</td>
-              <td>Full access to all modules and settings</td>
-              <td>1</td>
-              <td><Button variant="outline" size="sm">Manage</Button></td>
-            </tr>
-            <tr>
-              <td><span className="mono">ROLE-02</span></td>
-              <td className="fw6">HR Admin</td>
-              <td>Access to employee and leave data</td>
-              <td>1</td>
-              <td><Button variant="outline" size="sm">Manage</Button></td>
-            </tr>
-          </tbody>
-        </table>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export const AssetManagement: React.FC = () => {
   const [assets, setAssets] = useState<InventoryMaster[]>([]);
@@ -180,8 +99,8 @@ export const AssetManagement: React.FC = () => {
          const userId = await DataService.getUserIdByEmail(userEmail);
          if (userId) {
            await DataService.createInventoryAssignment({
-              Asset: selectedAsset.ID,
-              AssignedTo: userId,
+              AssetId: selectedAsset.ID,
+              AssignedToId: userId,
               AssignedDate: new Date().toISOString(),
               Status: 'Active'
            });
@@ -224,9 +143,10 @@ export const AssetManagement: React.FC = () => {
           return;
       }
 
+      // And create the assignment record
       await DataService.createInventoryAssignment({
-        Asset: selectedAsset.ID,
-        AssignedTo: userId,
+        AssetId: selectedAsset.ID,
+        AssignedToId: userId,
         AssignedDate: new Date().toISOString(),
         Status: 'Active'
       });
@@ -243,16 +163,16 @@ export const AssetManagement: React.FC = () => {
   const filteredEmployees = employees.filter(e => e.Title?.toLowerCase().includes(assignSearch.toLowerCase()) || e.Email?.toLowerCase().includes(assignSearch.toLowerCase()));
 
   return (
-    <div className="page active">
-      <div className="page-hd">
-        <div className="page-hd-l">
+    <div className="eh-page active">
+      <div className="eh-page-hd">
+        <div className="eh-page-hd-l">
           <h1>Asset Management</h1>
           <p>Track hardware and software inventory, and manage assignments.</p>
         </div>
         <Button variant="primary" icon={<Icons.Plus />} onClick={openAdd}>Add Asset</Button>
       </div>
 
-      <div className="grid eh-g3 mb14">
+      <div className="eh-grid eh-g3 mb14">
         <StatCard type="asset" value={assets.length} label="Total Assets" />
         <StatCard type="asset" value={assets.filter(a => a.Status === 'Assigned').length} label="Assigned" />
         <StatCard type="incident" value={assets.filter(a => a.Status === 'Repair').length} label="Needs Repair" subType="down" />
@@ -261,33 +181,33 @@ export const AssetManagement: React.FC = () => {
       <div className="ast-grid">
         {assets.map(a => (
           <div className="ast-card" key={a.AssetID || Math.random()}>
-            <div className="ast-ico"><Icons.Screen /></div>
-            <div className="ast-content">
-              <div className="ast-name">{a.AssetName || a.Title}</div>
-              <div className="ast-id">{a.AssetID}</div>
-              <div className="ast-meta">
-                <span>{a.Category}</span>
-                <span className={`pill p-${a.Status?.toLowerCase()}`}>{a.Status}</span>
-              </div>
-              {a.Status === 'Assigned' && (a as any).AssignedToUser && (
-                <div className="ast-assigned">
-                  Assigned to: <strong>{(a as any).AssignedToUser}</strong>
-                </div>
-              )}
-            </div>
-            <div className="ast-actions">
-              <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <div className="ast-ico"><Icons.Screen /></div>
+              <div style={{ display: 'flex', gap: '4px' }}>
                 <Button variant="outline" size="sm" onClick={() => openView(a)}>View</Button>
                 <Button variant="outline" size="sm" onClick={() => openEdit(a)}>Edit</Button>
               </div>
-              <div style={{ display: 'flex', gap: '8px', marginTop: 'auto' }}>
-                {a.Status === 'Available' ? (
-                  <Button variant="primary" size="sm" onClick={() => openAssign(a)}>Assign</Button>
-                ) : (
-                  <span style={{ fontSize: '0.85rem', color: 'var(--text-3)', padding: '6px 0' }}></span>
-                )}
-                <Button variant="danger" size="sm" onClick={() => handleDelete(a)}>Delete</Button>
+            </div>
+            <div className="ast-name" style={{ marginTop: '12px' }}>{a.AssetName || a.Title}</div>
+            <div className="ast-id">{a.AssetID}</div>
+            <div className="ast-meta">
+              <span>{a.Category}</span>
+              <span className={`pill p-${a.Status?.toLowerCase()}`}>{a.Status}</span>
+            </div>
+            
+            {a.Status === 'Assigned' && (a as any).AssignedToUser && (
+              <div style={{ marginTop: '8px', fontSize: '0.8rem', color: 'var(--text-2)' }}>
+                Assigned to: <strong>{(a as any).AssignedToUser}</strong>
               </div>
+            )}
+            
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '12px', borderTop: '1px solid var(--border)', paddingTop: '12px', alignItems: 'center' }}>
+              {a.Status === 'Available' ? (
+                <Button variant="primary" size="sm" onClick={() => openAssign(a)}>Assign</Button>
+              ) : (
+                <span style={{ fontSize: '0.85rem', color: 'var(--text-3)' }}>{a.Status}</span>
+              )}
+              <Button variant="danger" size="sm" onClick={() => handleDelete(a)}>Delete</Button>
             </div>
           </div>
         ))}

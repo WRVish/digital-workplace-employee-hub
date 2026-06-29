@@ -31,19 +31,21 @@ export const MyProfile: React.FC<MyProfileProps> = ({ userEmail, userName, userI
 
   const handleSavePreferences = async () => {
     setSaving(true);
-    await DataService.saveUserPreferences(prefId, userEmail, theme, colorScheme);
+    const success = await DataService.saveUserPreferences(prefId, userEmail, theme, colorScheme);
     
-    // Update live DOM classes
-    const htmlClassList = document.documentElement.classList;
-    
-    // Convert DOMTokenList to array to safely iterate and remove
-    const classesToRemove = Array.from(htmlClassList).filter(c => c.startsWith('theme-') || c.startsWith('scheme-'));
-    classesToRemove.forEach(c => htmlClassList.remove(c));
+    if (success) {
+      // Update live DOM classes
+      const htmlClassList = document.documentElement.classList;
+      
+      // Convert DOMTokenList to array to safely iterate and remove
+      const classesToRemove = Array.from(htmlClassList).filter(c => c.startsWith('theme-') || c.startsWith('scheme-'));
+      classesToRemove.forEach(c => htmlClassList.remove(c));
 
-    if (theme === 'Dark') htmlClassList.add('theme-dark');
-    if (colorScheme && colorScheme !== 'Ocean Blue') {
-      const schemeClass = 'scheme-' + colorScheme.toLowerCase().replace(/ /g, '-');
-      htmlClassList.add(schemeClass);
+      if (theme === 'Dark') htmlClassList.add('theme-dark');
+      if (colorScheme && colorScheme !== 'Ocean Blue') {
+        const schemeClass = 'scheme-' + colorScheme.toLowerCase().replaceAll(' ', '-');
+        htmlClassList.add(schemeClass);
+      }
     }
     
     setSaving(false);
@@ -69,17 +71,17 @@ export const MyProfile: React.FC<MyProfileProps> = ({ userEmail, userName, userI
   const currentSchemes = theme === 'Dark' ? darkSchemes : lightSchemes;
 
   return (
-    <div className="page active" id="page-myprofile">
-      <div className="page-hd">
-        <div className="page-hd-l">
+    <div className="eh-page active" id="page-myprofile">
+      <div className="eh-page-hd">
+        <div className="eh-page-hd-l">
           <h1>My Profile</h1>
           <p>Your personal information and work details.</p>
         </div>
       </div>
 
-      <div className="grid g2">
-        <div className="card">
-          <div className="sh">
+      <div className="eh-grid eh-g2">
+        <div className="eh-card">
+          <div className="eh-sh">
             <h2><span className="sdot" style={{ background: 'var(--c-employee)' }}></span>Personal Details</h2>
             <button className="btn btn-outline btn-sm">Edit</button>
           </div>
@@ -90,8 +92,7 @@ export const MyProfile: React.FC<MyProfileProps> = ({ userEmail, userName, userI
               <div style={{ fontSize: '.78rem', color: 'var(--text-3)' }}>{rolePillText}</div>
             </div>
           </div>
-          <div className="dt-wrap">
-        <table className="dt">
+          <table className="dt">
             <tbody>
               <tr><th scope="row" className="tm ts">Employee ID</th><td className="fw6">E001</td></tr>
               <tr><th scope="row" className="tm ts">Email</th><td>{userEmail}</td></tr>
@@ -104,17 +105,16 @@ export const MyProfile: React.FC<MyProfileProps> = ({ userEmail, userName, userI
             </tbody>
           </table>
         </div>
-        </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-          <div className="card">
+          <div className="eh-card">
             <CardHeader title="Leave Summary" dotColor="var(--c-leave)" />
             <div className="lb-wrap"><div className="lb-row"><span className="lb-name">Annual</span><span className="lb-count">8/14 days</span></div><div className="lb-track"><div className="lb-fill" style={{ width: '57%', background: 'var(--c-leave)' }}></div></div></div>
             <div className="lb-wrap"><div className="lb-row"><span className="lb-name">Sick</span><span className="lb-count">10/14 days</span></div><div className="lb-track"><div className="lb-fill" style={{ width: '71%', background: 'var(--c-asset)' }}></div></div></div>
             <div className="lb-wrap"><div className="lb-row"><span className="lb-name">Unpaid</span><span className="lb-count">0/5 days</span></div><div className="lb-track"><div className="lb-fill" style={{ width: '0%', background: 'var(--text-3)' }}></div></div></div>
           </div>
 
-          <div className="card">
+          <div className="eh-card">
             <CardHeader title="Appearance Preferences" dotColor="var(--brand-600)" />
             
             <div className="form-group">
@@ -137,7 +137,7 @@ export const MyProfile: React.FC<MyProfileProps> = ({ userEmail, userName, userI
 
             <div className="form-group" style={{ marginTop: '16px' }}>
               <div style={{ fontWeight: 600, fontSize: '.78rem', color: 'var(--text-2)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '.03em' }}>Color Scheme <span style={{ fontWeight: 400, color: 'var(--text-3)', fontSize: '0.75rem', marginLeft: '6px', textTransform: 'none' }}>{colorScheme}</span></div>
-              <div className="scheme-grid">
+              <div className="scheme-eh-grid">
                 {currentSchemes.map(scheme => (
                   <button 
                     key={scheme.name}

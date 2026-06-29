@@ -167,11 +167,13 @@ export class DataService {
   public static async getUserPreferences(email: string): Promise<any> {
     try {
       if (!email) return null;
-      const res = await UserPreferencesService.getAll({
-        filter: `Email eq '${email}'`
-      });
+      const res = await UserPreferencesService.getAll();
       const records = extractRecords(res);
-      return records.length > 0 ? records[0] : null;
+      const userPref = records.find(r => 
+        (r.Email && r.Email.toLowerCase() === email.toLowerCase()) || 
+        (r.Title && r.Title.toLowerCase().includes(email.split('@')[0].toLowerCase()))
+      );
+      return userPref || null;
     } catch (error) {
       console.warn("UserPreferences API failed, using default", error);
       return null;
@@ -182,15 +184,15 @@ export class DataService {
     try {
       if (id) {
         await UserPreferencesService.update(id, {
-          Theme: theme,
-          ColorScheme: colorScheme
+          Theme: { Value: theme } as any,
+          ColorScheme: { Value: colorScheme } as any
         });
       } else {
         await UserPreferencesService.create({
           Title: `Pref-${email.split('@')[0]}`,
           Email: email,
-          Theme: theme,
-          ColorScheme: colorScheme
+          Theme: { Value: theme } as any,
+          ColorScheme: { Value: colorScheme } as any
         });
       }
       return true;
@@ -340,11 +342,44 @@ export class DataService {
   public static async getInventoryAssignments(_userEmail: string, _roles: string[]): Promise<InventoryAssignment[]> {
     try {
       const res = await InventoryAssignmentService.getAll();
-      return extractRecords(res) as InventoryAssignment[];
+      const records = extractRecords(res) as InventoryAssignment[];
+      // Map the user name out of the AssignedTo Person column
+      return records.map(r => ({
+        ...r,
+        AssignedToUser: r.AssignedTo?.Title || r.AssignedTo?.DisplayName || (r.AssignedTo as any)?.Value || ''
+      }));
     } catch (e) {
       console.error(e);
       return [];
     }
+  }
+
+  public static async createInventoryAssignment(record: any): Promise<void> {
+    if (!record.Title) record.Title = `ASG-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`;
+    const res = await InventoryAssignmentService.create(record);
+    if (res.error) throw new Error(res.error.message);
+  }
+
+  public static async updateInventoryItem(id: string, record: any): Promise<void> {
+    const res = await InventoryMasterService.update(id, record);
+    if (res.error) throw new Error(res.error.message);
+  }
+
+  public static async deleteInventoryItem(id: string): Promise<void> {
+    await InventoryMasterService.delete(id);
+  }
+
+  public static async createInventoryItem(record: any): Promise<void> {
+    const res = await InventoryMasterService.create(record);
+    if (res.error) throw new Error(res.error.message);
+  }
+
+  // Resolve user to their Power Apps / SharePoint ID (or use email as fallback if PowerApps connector handles it)
+  public static async getUserIdByEmail(email: string): Promise<string | number | null> {
+    // In Dataverse/Power Apps, the person column might accept the email string directly or a User record ID.
+    // For simplicity, we can return the email to be used in the People Picker lookup column.
+    // If it's a SharePoint backend, the connector often handles claims or email via the Value property.
+    return email; 
   }
 }
 

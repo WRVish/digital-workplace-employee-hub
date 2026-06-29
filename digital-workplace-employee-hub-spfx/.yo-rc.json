@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "digital-workplace-employee-hub-spfx",
+    "environment": "spo",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "ModernEmployeeHub",
+    "componentDescription": "Modern Employee Hub",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.2",
+    "sdksVersions": {},
+    "version": "1.22.0",
+    "libraryName": "digital-workplace-employee-hub-spfx",
+    "libraryId": "8402bcf2-ea78-4fec-9196-a95690ae6d60",
+    "packageManager": "npm",
+    "solutionShortDescription": "digital-workplace-employee-hub-spfx description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

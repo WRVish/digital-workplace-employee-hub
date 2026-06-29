@@ -102,9 +102,9 @@ export interface TravelRequest {
 }
 
 export interface InventoryMaster {
-  ID?: string; // Dataverse / Power Apps uses GUID strings for ID
-  Title: string;
-  AssetID: string;
+  ID?: number;
+  Title: string; 
+  AssetID: string; 
   AssetName: string;
   Category: 'Laptop' | 'Desktop' | 'Mobile' | 'Peripherals' | string;
   SerialNumber?: string;
@@ -115,13 +115,11 @@ export interface InventoryMaster {
 }
 
 export interface InventoryAssignment {
-  ID?: string;
-  Title: string;
-  Asset?: any; // Lookup
-  AssetId?: string; // Lookup ID
-  AssignedTo?: any; // Person column
-  AssignedToId?: string | number;
-  AssignedToUser?: string; // Dynamic mapping for UI
+  ID?: number;
+  Title: string; // ASG-xxxx
+  AssetId: number; // Lookup ID for InventoryMaster
+  AssignedToId: number; // Person column
+  AssignedToUser?: string; // Mapped dynamically in DataService
   AssignedDate: string; // DateTime
   ReturnedDate?: string; // DateTime
   Status: 'Active' | 'Returned' | 'Lost';
