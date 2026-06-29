@@ -233,16 +233,15 @@ export const LeaveManagement: React.FC<{ userEmail: string }> = ({ userEmail }) 
              {searchQuery && !selectedEmployeeEmail && (
                 <div style={{ border: '1px solid var(--border-color)', borderRadius: '4px', maxHeight: '150px', overflowY: 'auto', marginTop: '4px' }}>
                    {filteredEmployees.map(e => (
-                      <div 
+                      <button 
                          key={e.Email} 
                          className="emp-search-result"
-                         role="button"
-                         tabIndex={0}
+                         type="button"
                          onClick={() => { setSelectedEmployeeEmail(e.Email); setSearchQuery(e.Title); }}
-                         onKeyDown={(k) => { if (k.key === 'Enter' || k.key === ' ') { setSelectedEmployeeEmail(e.Email); setSearchQuery(e.Title); } }}
+                         style={{ padding: '8px 12px', cursor: 'pointer', borderBottom: '1px solid var(--border-color)', background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit' }}
                       >
                          <div className="emp-name">{e.Title}</div><strong> ({e.Email})</strong>
-                      </div>
+                      </button>
                    ))}
                    {filteredEmployees.length === 0 && <div style={{ padding: '8px' }}>No employees found.</div>}
                 </div>

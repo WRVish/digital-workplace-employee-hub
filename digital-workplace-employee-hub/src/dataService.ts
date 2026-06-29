@@ -170,8 +170,8 @@ export class DataService {
       const res = await UserPreferencesService.getAll();
       const records = extractRecords(res);
       const userPref = records.find(r => 
-        (r.Email && r.Email.toLowerCase() === email.toLowerCase()) || 
-        (r.Title && r.Title.toLowerCase().includes(email.split('@')[0].toLowerCase()))
+        (r.Email?.toLowerCase() === email.toLowerCase()) || 
+        (r.Title?.toLowerCase().includes(email.split('@')[0].toLowerCase()))
       );
       return userPref || null;
     } catch (error) {

@@ -408,16 +408,16 @@ export class DataService {
 
   // --- MOCK NEW ENDPOINTS FOR LEAVE ADMINISTRATION ---
   
-  private static _mockLeaveTypes: any[] = [
+  private static readonly _mockLeaveTypes: any[] = [
     { ID: 1, Title: 'Annual', DefaultBalance: 14 },
     { ID: 2, Title: 'Sick', DefaultBalance: 14 },
     { ID: 3, Title: 'Maternity', DefaultBalance: 90 }
   ];
   
-  private static _mockLeaveBalances: any[] = []; // format: { Email, LeaveType, Balance }
+  private static readonly _mockLeaveBalances: any[] = []; // format: { Email, LeaveType, Balance }
 
   public static async getLeaveTypes(): Promise<any[]> {
-    return Promise.resolve([...this._mockLeaveTypes]);
+    return [...this._mockLeaveTypes];
   }
 
   public static async createLeaveType(title: string, defaultBalance: number): Promise<void> {
@@ -426,7 +426,7 @@ export class DataService {
       Title: title,
       DefaultBalance: defaultBalance
     });
-    return Promise.resolve();
+    return;
   }
 
   public static async getLeaveBalances(email: string): Promise<any[]> {
@@ -450,7 +450,7 @@ export class DataService {
     if (record) {
       record.Balance = newBalance;
     }
-    return Promise.resolve();
+    return;
   }
 
   // --- NEW CREATE METHODS FOR EVENTS AND INVENTORY ---

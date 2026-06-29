@@ -31,7 +31,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ userEmail, userName, isAdm
         setIncidents(incRes);
         setLeaves(levRes);
         setExpenses(expRes);
-        setAssets(astRes.filter(a => a.Status === 'Active' && (a.AssignedToUser === userName || (a.AssignedToUser && a.AssignedToUser.includes(userName.split(' ')[0])))));
+        setAssets(astRes.filter(a => a.Status === 'Active' && (a.AssignedToUser === userName || a.AssignedToUser?.includes(userName.split(' ')[0]))));
       } catch (err) {
         console.error(err);
       } finally {

@@ -142,13 +142,6 @@ select,input,textarea{font-family:inherit}
 .si.employee{background:linear-gradient(135deg,#F0FDFA,#CCFBF1);color:var(--c-employee)}
 .si.brand{background:linear-gradient(135deg,var(--brand-50),var(--brand-100));color:var(--brand-600)}
 
-html.theme-dark .si.leave { background: color-mix(in srgb, var(--c-leave) 15%, transparent); }
-html.theme-dark .si.incident { background: color-mix(in srgb, var(--c-incident) 15%, transparent); }
-html.theme-dark .si.expense { background: color-mix(in srgb, var(--c-expense) 15%, transparent); }
-html.theme-dark .si.asset { background: color-mix(in srgb, var(--c-asset) 15%, transparent); }
-html.theme-dark .si.travel { background: color-mix(in srgb, var(--c-travel) 15%, transparent); }
-html.theme-dark .si.events { background: color-mix(in srgb, var(--c-events) 15%, transparent); }
-html.theme-dark .si.employee { background: color-mix(in srgb, var(--c-employee) 15%, transparent); }
 
 .sv{font-family:var(--font-d);font-size:1.8rem;font-weight:700;line-height:1;letter-spacing:-0.03em;color:var(--text-1)}
 .sl{font-size:.8rem;font-weight:600;color:var(--text-3);margin-top:4px}
@@ -198,9 +191,9 @@ html.theme-dark .sd.neu { background: var(--surface-3); }
 .btn-primary:hover{box-shadow:0 6px 16px color-mix(in srgb, var(--brand-600) 60%, transparent);transform:translateY(-2px)}
 .btn-outline{background:transparent;color:var(--text-1);border-color:var(--border-2);box-shadow:none}
 .btn-outline:hover{background:var(--surface-3);border-color:var(--text-3);transform:translateY(-1px)}
-.btn-danger{background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff;border:none;box-shadow:0 4px 12px rgba(239, 68, 68, 0.4)}
+.btn-danger{background:linear-gradient(135deg,#DC2626,#B91C1C);color:#fff;border:none;box-shadow:0 4px 12px rgba(239, 68, 68, 0.4)}
 .btn-danger:hover{box-shadow:0 6px 16px rgba(239, 68, 68, 0.6);transform:translateY(-2px)}
-.btn-success{background:linear-gradient(135deg,#10B981,#059669);color:#fff;border:none;box-shadow:0 4px 12px rgba(16, 185, 129, 0.4)}
+.btn-success{background:linear-gradient(135deg,#059669,#047857);color:#fff;border:none;box-shadow:0 4px 12px rgba(16, 185, 129, 0.4)}
 .btn-sm{padding:6px 14px;font-size:.75rem;border-radius:var(--r-sm)}
 
 /* FORM ELEMENTS */
@@ -247,9 +240,7 @@ html.theme-dark .ast-ico{background:color-mix(in srgb, var(--c-asset) 15%, trans
 .bstat{text-align:center;background:rgba(255,255,255,0.1);padding:12px 20px;border-radius:var(--r-md);backdrop-filter:blur(10px)}
 .bstat-l{font-size:.75rem;opacity:.9;margin-top:2px;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
 
-/* CARDS */
-.card{background:var(--surface-2);border-radius:var(--r-xl);padding:24px;border:1px solid var(--border);box-shadow:var(--sh-md);transition:var(--trans)}
-.card:hover{box-shadow:var(--sh-lg);border-color:var(--border-2)}
+
 
 /* ACTIVITY LIST */
 .act-list{display:flex;flex-direction:column;gap:12px}

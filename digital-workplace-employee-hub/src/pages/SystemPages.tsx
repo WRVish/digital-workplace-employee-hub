@@ -104,8 +104,9 @@ export const AssetManagement: React.FC = () => {
   const [assignSearch, setAssignSearch] = useState('');
   const [assignSelectedUser, setAssignSelectedUser] = useState<any>(null);
 
-  const loadData = () => {
-    Promise.all([DataService.getInventory(), DataService.getEmployees(), DataService.getInventoryAssignments('', [])]).then(([resAssets, resEmps, resAssignments]) => {
+  const loadData = async () => {
+    try {
+      const [resAssets, resEmps, resAssignments] = await Promise.all([DataService.getInventory(), DataService.getEmployees(), DataService.getInventoryAssignments('', [])]);
       const mappedAssets = resAssets.map(a => {
         const activeAssignment = resAssignments.find(asg => asg.AssetId === a.ID && asg.Status === 'Active');
         let derivedStatus = a.Status;
@@ -118,8 +119,11 @@ export const AssetManagement: React.FC = () => {
       });
       setAssets(mappedAssets as any);
       setEmployees(resEmps);
+    } catch (e) {
+      console.error(e);
+    } finally {
       setLoading(false);
-    });
+    }
   };
 
   useEffect(() => { loadData(); }, []);
@@ -354,17 +358,15 @@ export const AssetManagement: React.FC = () => {
             {formData.AssignedTo && formData.AssignedTo.length > 1 && !employees.find(e => e.Title === formData.AssignedTo) && (
               <div style={{ border: '1px solid var(--border)', borderRadius: '4px', maxHeight: '150px', overflowY: 'auto', marginTop: '4px' }}>
                  {employees.filter(e => e.Title.toLowerCase().includes(formData.AssignedTo.toLowerCase()) || e.Email.toLowerCase().includes(formData.AssignedTo.toLowerCase())).map(e => (
-                    <div 
+                    <button 
                       key={e.Email} 
                       className="emp-search-result"
-                      role="button"
-                      tabIndex={0}
+                      type="button"
                       onClick={() => setFormData({...formData, AssignedTo: e.Title})}
-                      onKeyDown={(k) => { if (k.key === 'Enter' || k.key === ' ') { setFormData({...formData, AssignedTo: e.Title}); } }}
-                      style={{ padding: '8px 12px', cursor: 'pointer', borderBottom: '1px solid var(--border)', fontSize: '0.85rem' }}
+                      style={{ padding: '8px 12px', cursor: 'pointer', borderBottom: '1px solid var(--border)', fontSize: '0.85rem', background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit' }}
                     >
                        <strong>{e.Title}</strong> ({e.Email})
-                    </div>
+                    </button>
                  ))}
               </div>
             )}
@@ -411,17 +413,15 @@ export const AssetManagement: React.FC = () => {
            {assignSearch && !assignSelectedUser && (
               <div style={{ border: '1px solid var(--border-color)', borderRadius: '4px', maxHeight: '150px', overflowY: 'auto', marginTop: '4px' }}>
                  {filteredEmployees.map(e => (
-                    <div 
-                       key={e.Email} 
-                       className="emp-search-result"
-                       role="button"
-                       tabIndex={0}
-                       onClick={() => { setAssignSelectedUser(e); setAssignSearch(e.Title); }}
-                       onKeyDown={(k) => { if (k.key === 'Enter' || k.key === ' ') { setAssignSelectedUser(e); setAssignSearch(e.Title); } }}
-                       style={{ padding: '8px 12px', cursor: 'pointer', borderBottom: '1px solid var(--border-color)' }}
+                    <button 
+                      key={e.Email} 
+                      className="emp-search-result"
+                      type="button"
+                      onClick={() => { setAssignSelectedUser(e); setAssignSearch(e.Title); }}
+                      style={{ padding: '8px 12px', cursor: 'pointer', borderBottom: '1px solid var(--border-color)', background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit' }}
                     >
                        <strong>{e.Title}</strong> ({e.Email})
-                    </div>
+                    </button>
                  ))}
                  {filteredEmployees.length === 0 && <div style={{ padding: '8px' }}>No employees found.</div>}
               </div>
