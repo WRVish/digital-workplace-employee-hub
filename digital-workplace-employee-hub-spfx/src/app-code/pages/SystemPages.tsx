@@ -275,9 +275,13 @@ export const AssetManagement: React.FC = () => {
               <div style={{ border: '1px solid var(--border)', borderRadius: '4px', maxHeight: '150px', overflowY: 'auto', marginTop: '4px' }}>
                  {employees.filter(e => e.Title.toLowerCase().includes(formData.AssignedTo.toLowerCase()) || e.Email.toLowerCase().includes(formData.AssignedTo.toLowerCase())).map(e => (
                     <div 
-                       key={e.Email} 
-                       style={{ padding: '8px 12px', cursor: 'pointer', borderBottom: '1px solid var(--border)', fontSize: '0.85rem' }}
-                       onClick={() => setFormData({...formData, AssignedTo: e.Title})}
+                      key={e.Email} 
+                      className="emp-search-result"
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => setFormData({...formData, AssignedTo: e.Title})}
+                      onKeyDown={(k) => { if (k.key === 'Enter' || k.key === ' ') { setFormData({...formData, AssignedTo: e.Title}); } }}
+                      style={{ padding: '8px 12px', cursor: 'pointer', borderBottom: '1px solid var(--border)', fontSize: '0.85rem' }}
                     >
                        <strong>{e.Title}</strong> ({e.Email})
                     </div>
@@ -328,9 +332,13 @@ export const AssetManagement: React.FC = () => {
               <div style={{ border: '1px solid var(--border-color)', borderRadius: '4px', maxHeight: '150px', overflowY: 'auto', marginTop: '4px' }}>
                  {filteredEmployees.map(e => (
                     <div 
-                       key={e.Email} 
-                       style={{ padding: '8px 12px', cursor: 'pointer', borderBottom: '1px solid var(--border-color)' }}
-                       onClick={() => { setAssignSelectedUser(e); setAssignSearch(e.Title); }}
+                      key={e.Email} 
+                      className="emp-search-result"
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => { setAssignSelectedUser(e); setAssignSearch(e.Title); }}
+                      onKeyDown={(k) => { if (k.key === 'Enter' || k.key === ' ') { setAssignSelectedUser(e); setAssignSearch(e.Title); } }}
+                      style={{ padding: '8px 12px', cursor: 'pointer', borderBottom: '1px solid var(--border-color)' }}
                     >
                        <strong>{e.Title}</strong> ({e.Email})
                     </div>

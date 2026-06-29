@@ -235,10 +235,13 @@ export const LeaveManagement: React.FC<{ userEmail: string }> = ({ userEmail }) 
                    {filteredEmployees.map(e => (
                       <div 
                          key={e.Email} 
-                         style={{ padding: '8px 12px', cursor: 'pointer', borderBottom: '1px solid var(--border-color)' }}
+                         className="emp-search-result"
+                         role="button"
+                         tabIndex={0}
                          onClick={() => { setSelectedEmployeeEmail(e.Email); setSearchQuery(e.Title); }}
+                         onKeyDown={(k) => { if (k.key === 'Enter' || k.key === ' ') { setSelectedEmployeeEmail(e.Email); setSearchQuery(e.Title); } }}
                       >
-                         <strong>{e.Title}</strong> ({e.Email})
+                         <div className="emp-name">{e.Title}</div><strong> ({e.Email})</strong>
                       </div>
                    ))}
                    {filteredEmployees.length === 0 && <div style={{ padding: '8px' }}>No employees found.</div>}
@@ -263,7 +266,7 @@ export const LeaveManagement: React.FC<{ userEmail: string }> = ({ userEmail }) 
                     <Input 
                       type="number" 
                       value={b.Balance} 
-                      onChange={(e) => handleBalanceChange(b.LeaveType, parseInt(e.target.value) || 0)}
+                      onChange={(e) => handleBalanceChange(b.LeaveType, Number.parseInt(e.target.value, 10) || 0)}
                       style={{ width: '80px' }}
                     />
                   </td>
@@ -330,7 +333,7 @@ export const LeaveManagement: React.FC<{ userEmail: string }> = ({ userEmail }) 
           <Input value={newLeaveType.Title} onChange={e => setNewLeaveType({...newLeaveType, Title: e.target.value})} placeholder="e.g. Bereavement" />
         </FormGroup>
         <FormGroup label="Default Annual Quota (Days)">
-          <Input type="number" value={newLeaveType.DefaultBalance} onChange={e => setNewLeaveType({...newLeaveType, DefaultBalance: parseInt(e.target.value) || 0})} />
+          <Input type="number" value={newLeaveType.DefaultBalance} onChange={e => setNewLeaveType({...newLeaveType, DefaultBalance: Number.parseInt(e.target.value, 10) || 0})} />
         </FormGroup>
         <div className="modal-actions">
           <Button onClick={() => setIsTypeModalOpen(false)}>Cancel</Button>
